@@ -36,4 +36,15 @@ UUID=<uuid from blkid goes here>       /var/torrents   ext4    noexec,nofail,  0
 
 you can just reboot here, to get it to mount, or `mount` it directly to `/var/torrents` and `systemctl daemon-reload`
 
+## `minidlna`
+install `minidlna` with your package manager
 
+in `/etc/minidlna.conf` change `media_dir` to `/var/torrents/complete`
+
+give your minidlna server a friendly name by changing the `friendly_name` setting
+
+sometimes `enable_subtitles` actually works with VLC, go ahead and explicitly enable it
+
+run `systemctl enable --now minidlna.service ` to enable and turn on minidlna
+
+you can test if its working by pulling up VLC on your favorite device, navigating to `Universal Plug'n'Play` and seeing if you friendly named server shows up there
