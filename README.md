@@ -17,3 +17,23 @@ install `openvpn` with your package manager
 follow [this guide](https://support.surfshark.com/hc/en-us/articles/360011051133-How-to-set-up-manual-OpenVPN-connection-using-Linux-Terminal-) to get surfshark's `.ovpn` config files
 
 use the `surfshark.service` `systemd` unit file in this repo, drop it in `/etc/systemd/system/surfshark.service`
+
+## `/etc/fstab` to setup automounting an external drive
+
+user `mkdir` to make the `/var/torrents/` directory
+
+find your external drive with `lsblk`
+
+create partition, and format with `fdisk` and `mkfs.ext4`
+
+use `blkid` to find the disk's UUID
+
+add the following to your `/etc/fstab` file to automount your new partition
+```
+UUID=<uuid from blkid goes here>       /var/torrents   ext4    noexec,nofail,  0 2
+# EXAMPLE: UUID=e10cc9ae-ce54-4fa7-a58a-000fc56eb0f0       /var/torrents   ext4    noexec,nofail,  0 2
+```
+
+you can just reboot here, to get it to mount, or `mount` it directly to `/var/torrents` and `systemctl daemon-reload`
+
+
