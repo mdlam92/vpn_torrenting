@@ -1,0 +1,11 @@
+[Unit]
+Description=surfshark_openvpn
+Wants=network-online.target
+After=network-online.target
+Restart=always
+
+[Service]
+ExecStart=/usr/bin/openvpn --config /etc/openvpn/us-sea.prod.surfshark.com_udp.ovpn
+
+[Install]
+WantedBy=transmission.service
